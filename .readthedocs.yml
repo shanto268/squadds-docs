@@ -10,6 +10,8 @@ build:
   os: ubuntu-22.04
   tools:
     python: '3.10'
+  post_build:
+    - find _build/pdf -type f ! -name '*.pdf' -delete
 
 # Build documentation in the "docs/" directory with Sphinx
 sphinx:
@@ -29,3 +31,8 @@ python:
 submodules:
   include:
     - all
+
+# Add this section to specify the only file to upload for PDF
+artifacts:
+  - path: _build/pdf/squadds.pdf
+    type: pdf
