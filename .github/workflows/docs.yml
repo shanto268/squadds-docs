@@ -22,7 +22,7 @@ jobs:
       - name: Checkout SQuADDS repository
         uses: actions/checkout@v3
         with:
-          repository: 'LFL-SQuADDS/SQuADDS'
+          repository: 'LFL-Lab/SQuADDS'
           path: squadds-repo
           token: ${{ secrets.GITHUB_TOKEN }}
 
