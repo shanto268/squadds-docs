@@ -1,0 +1,27 @@
+# Core dependencies
+addict
+datasets
+huggingface_hub
+pandas
+pyEPR
+python-dotenv
+scipy
+scqubits
+seaborn
+setuptools
+tabulate
+
+# Documentation dependencies
+sphinx>=5.0.0
+qiskit-sphinx-theme>=1.10.0
+nbsphinx>=0.8.9
+jupyter_sphinx>=0.3.2
+sphinx_copybutton>=0.5.0
+sphinx_design>=0.3.0
+reno>=3.4.0
+sphinxcontrib-katex>=0.9.0
+pydata_sphinx_theme>=0.12.0
+recommonmark>=0.7.1
+
+# Main package dependency
+SQuADDS>=0.1.0
