@@ -14,7 +14,6 @@ build:
 # Build documentation in the "docs/" directory with Sphinx
 sphinx:
   configuration: docs/conf.py
-  builder: html
 
 # Optionally build your docs in additional formats such as PDF and ePub
 formats:
@@ -30,15 +29,3 @@ python:
 submodules:
   include:
     - all
-
-# Add this section to specify the only file to upload for PDF
-artifacts:
-  - path: _build/pdf/squadds.pdf
-    type: pdf
-
-# Custom build command for PDF
-commands:
-  - sphinx-build -b latex docs _build/latex
-  - make -C _build/latex all-pdf
-  - mkdir -p _build/pdf
-  - mv _build/latex/*.pdf _build/pdf/
