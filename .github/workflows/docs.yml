@@ -41,27 +41,46 @@ jobs:
 
       - name: Install dependencies
         run: |
+          set -e
           python -m pip install --upgrade pip
           pip install -r docs-repo/docs/requirements.txt
           pip install sphinx qiskit-sphinx-theme nbsphinx jupyter_sphinx sphinx_copybutton sphinx_design reno sphinxcontrib-katex pydata_sphinx_theme recommonmark
 
       - name: Install Pandoc v 2.18
         run: |
+          set -e
           sudo apt-get remove -y pandoc
           wget https://github.com/jgm/pandoc/releases/download/2.18/pandoc-2.18-1-amd64.deb
           sudo dpkg -i pandoc-2.18-1-amd64.deb
 
+      - name: Clean tutorials directory
+        run: rm -rf docs-repo/docs/source/tutorials/*
+
       - name: Copy tutorials from SQuADDS repository
         run: |
+          set -e
           mkdir -p docs-repo/docs/source/tutorials
-          cp squadds-repo/tutorials/Tutorial*.ipynb docs-repo/docs/source/tutorials/
-          cp squadds-repo/tutorials/*.png docs-repo/docs/source/tutorials/
+          cp squadds-repo/tutorials/Tutorial*.ipynb docs-repo/docs/source/tutorials/ || true
+          cp squadds-repo/tutorials/*.png docs-repo/docs/source/tutorials/ || true
+
+      - name: List tutorials
+        run: ls -l docs-repo/docs/source/tutorials
 
       - name: Build documentation
         run: |
+          set -e
           cd docs-repo/docs
           make clean
           make html
+
+      - name: List built files
+        run: ls -l docs-repo/docs/_build/html
+
+      - name: Show index.html head
+        run: head -20 docs-repo/docs/_build/html/index.html
+
+      - name: Ensure .nojekyll
+        run: touch docs-repo/docs/_build/html/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
